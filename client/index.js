@@ -19,32 +19,33 @@ document.getElementById("exchange-address").addEventListener('input', ({ target:
 
 document.getElementById("transfer-amount").addEventListener('click', () => {
 
-  const sender = document.getElementById("exchange-address").value;
+  const senderAddress = document.getElementById("exchange-address").value;
   const amount = document.getElementById("send-amount").value;
   const recipient = document.getElementById("recipient").value;
-  const senderPrivatekey = document.getElementById("sender-privateKey").value;
-  console.log(sender);
+  const senderPrivatekey = document.getElementById("sender-PrivateKey").value;
+  console.log(senderAddress);
   console.log(amount);
   console.log(recipient);
   console.log(senderPrivatekey);
-  //SIGN
+  
+  //----------sign------------------
   const ec = new EC('secp256k1');
   const key = ec.keyFromPrivate(senderPrivatekey);
   const message = {
     amount: amount,
     recipient:recipient,
-    sender:sender
+    senderAddress:senderAddress
   }
   console.log(message);
   const msgHash = SHA256(message);
   console.log(msgHash);
-  console.log(msgHash.words[0]);
+  
   const signature = key.sign(msgHash.words);
   console.log(signature);
   const recid = ec.getKeyRecoveryParam(msgHash.words, signature, key.getPublic());
 
   const body = JSON.stringify({ 
-    sender: sender.trim(), recipient: recipient.trim(), amount, recid, message, signature: {
+    senderAddress: senderAddress.trim(), recipient: recipient.trim(), amount, recid, message, signature: {
       r: signature.r.toString(16),
       s: signature.s.toString(16)
     }
