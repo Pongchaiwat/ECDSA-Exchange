@@ -6,11 +6,19 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.0.0-rc.0",
+    "nodemon": "^2.0.15",
     "parcel": "^2.0.0-rc.0",
     "sass": "^1.26.7"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "crypto-js": "^4.1.1",
+    "elliptic": "^6.5.4",
+    "express": "^4.17.1",
+    "ganache": "^7.0.0",
+    "package.json": "^2.0.1"
+  },
+  "scripts": {
+    "ganache": "ganache --wallet.seed myCustomSeed"
   }
 }
